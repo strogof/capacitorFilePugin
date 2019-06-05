@@ -1,0 +1,7 @@
+{
+  "name": "fileSystemCap",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
