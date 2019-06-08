@@ -66,15 +66,19 @@ export class Tab1Page {
             // When getting the full response body
             console.log('ordiniFilesystem.db downloaded');
             const contFile: any = event.body;
-            const base64String = btoa(contFile);
-            await Filesystem.writeFile({
-                data: base64String,
-                directory: FilesystemDirectory.Data,
-                path: 'ordiniFilesystem.db'
-            })
-            .then(() => {
-                console.log('install ordiniFilesystem OK');
-              });
+            const reader = new FileReader;
+            reader.onload = () => {
+                var base64String = reader.result as string;
+                Filesystem.writeFile({
+                  data: base64String,
+                  directory: FilesystemDirectory.Data,
+                  path: 'ordiniFilesystem.db'
+              })
+              .then(() => {
+                  console.log('install ordiniFilesystem OK');
+                });
+            };
+            reader.readAsDataURL(contFile);
             break;
         }
       },
